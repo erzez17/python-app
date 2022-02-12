@@ -26,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: erzez/reali-app:latest
+          tags: erzez/reali-app:$(git rev-parse --short "$GITHUB_SHA")
   
   helm:
     name: 'Deploy Helm'
@@ -47,4 +47,4 @@ jobs:
        env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
        with:
-          command: helm upgrade app-chart --install --wait app-chart/ -f app-chart/values.yaml
+          command: helm upgrade app-chart --install --wait app-chart/ -f app-chart/values.yaml --set deployment.image.tag=$(git rev-parse --short "$GITHUB_SHA")
