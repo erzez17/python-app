@@ -3,6 +3,6 @@ variable "region" {
   description = "AWS region"
 }
 
-variable "cluster name" {
+variable "cluster_name" {
   default = "erez-reali-cluster"
 }
